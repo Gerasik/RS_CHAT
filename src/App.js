@@ -2,7 +2,7 @@ import React from 'react'
 import Chat from './components/chat/Chat'
 import { addMessage } from './redux/actions'
 import store from './redux/store'
-import { socket } from './socket'
+import socket from './socket'
 
 import './style.sass'
 

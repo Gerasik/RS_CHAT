@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import { socket } from '../../../../socket'
+import socket from '../../../../socket'
 // import { connect } from "react-redux";
 // import { addMessage } from "../../../../redux/actions";
 import './sendMessage.sass'
@@ -14,7 +14,9 @@ export default class SendMessage extends Component {
     this.setState({ input });
   };
 
-  handleAddTodo = () => {
+  handleAddTodo = (e) => {
+    e.preventDefault();
+    if (this.state.input.length > 0){
     const name = 'Geras';
     const message = JSON.stringify({
       from: name, 
@@ -22,19 +24,21 @@ export default class SendMessage extends Component {
     });
     socket.send(message);
     // this.props.addMessage(this.state.input);
-    this.setState({ input: "" });
+    this.setState({ input: "" });}
   };
 
   render() {
     return (
       <div>
-        <input
-          onChange={e => this.updateInput(e.target.value)}
-          value={this.state.input}
-        />
-        <button className="send" onClick={this.handleAddTodo}>
-          Send
-        </button>
+        <form onSubmit={this.handleAddTodo}>
+          <input
+            onChange={e => this.updateInput(e.target.value)}
+            value={this.state.input}
+          />
+          <button className="send">
+            Send
+          </button>
+        </form>
       </div>
     );
   }
