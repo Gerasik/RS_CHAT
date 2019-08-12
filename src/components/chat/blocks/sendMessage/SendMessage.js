@@ -1,9 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
-import { addMessage } from "../../../../redux/actions";
+import React, {Component} from "react";
+import { socket } from '../../../../socket'
+// import { connect } from "react-redux";
+// import { addMessage } from "../../../../redux/actions";
 import './sendMessage.sass'
 
-class SendMessage extends React.Component {
+export default class SendMessage extends Component {
   constructor(props) {
     super(props);
     this.state = { input: "" };
@@ -14,7 +15,13 @@ class SendMessage extends React.Component {
   };
 
   handleAddTodo = () => {
-    this.props.addMessage(this.state.input);
+    const name = 'Geras';
+    const message = JSON.stringify({
+      from: name, 
+      message: this.state.input
+    });
+    socket.send(message);
+    // this.props.addMessage(this.state.input);
     this.setState({ input: "" });
   };
 
@@ -33,7 +40,16 @@ class SendMessage extends React.Component {
   }
 }
 
-export default connect(
-  null,
-  { addMessage }
-)(SendMessage);
+//  SendMessage
+
+// const sent = function(){
+//     const mess = JSON.stringify({from: 'gerasik', message: 'Hi'});
+//     socket.send(mess);
+// } 
+
+
+
+// export default connect(
+//   null,
+//   { addMessage }
+// )(SendMessage);

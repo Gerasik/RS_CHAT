@@ -1,7 +1,7 @@
 import { ADD_MESSAGE } from "../actionTypes";
 
 const initialState = {
-  messages: [123]
+  messages: []
 };
 
 export default function(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function(state = initialState, action) {
       const { message } = action.payload;
       return {
         ...state,
-        messages: [...state.messages, message]
+        messages: [...state.messages, ...message]
       };
     }
     default:

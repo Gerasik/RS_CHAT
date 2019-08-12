@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-// import MessageList from './blocks/messageList/MessageList'
+import MessageList from './blocks/messageList/MessageList'
 import SendMessage from './blocks/sendMessage/SendMessage'
 import './chat.sass'
-import List from './List'
+// import List from './List'
 
 class Chat extends Component {
     constructor(props){
@@ -12,13 +12,13 @@ class Chat extends Component {
         }
     }
     render(){ 
-        console.log(this.state.messages)
+        // console.log(this.state.messages)
         return (
             <>
                 <section className="chat">
                     <div className="chat-wrap">
-                        {/* <MessageList data={this.state.messages}/> */}
-                        <List/>
+                        <MessageList/>
+                        {/* <List/> */}
                     </div>
                     <SendMessage/>
                 </section>
