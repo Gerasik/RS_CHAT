@@ -1,10 +1,9 @@
 import React, {Component} from "react";
-import socket from '../../../../socket'
-// import { connect } from "react-redux";
-// import { addMessage } from "../../../../redux/actions";
+import socket from '../../../../socket';
+import { connect } from 'react-redux'
 import './sendMessage.sass'
 
-export default class SendMessage extends Component {
+class SendMessage extends Component {
   constructor(props) {
     super(props);
     this.state = { input: "" };
@@ -16,15 +15,14 @@ export default class SendMessage extends Component {
 
   handleAddTodo = (e) => {
     e.preventDefault();
-    if (this.state.input.length > 0){
-    const name = 'Geras';
-    const message = JSON.stringify({
-      from: name, 
-      message: this.state.input
-    });
-    socket.send(message);
-    // this.props.addMessage(this.state.input);
-    this.setState({ input: "" });}
+    // if (this.state.input.length > 0){
+      const message = JSON.stringify({
+        from: this.props.name, 
+        message: this.state.input
+      });
+      socket.send(message);
+      this.setState({ input: "" });
+    // }
   };
 
   render() {
@@ -44,16 +42,9 @@ export default class SendMessage extends Component {
   }
 }
 
-//  SendMessage
-
-// const sent = function(){
-//     const mess = JSON.stringify({from: 'gerasik', message: 'Hi'});
-//     socket.send(mess);
-// } 
-
-
-
-// export default connect(
-//   null,
-//   { addMessage }
-// )(SendMessage);
+const mapStateToProps = state => {
+  const { authorization } = state;
+  return { name: authorization.authName };
+};
+  
+export default connect(mapStateToProps)(SendMessage);

@@ -1,19 +1,20 @@
 import React from 'react'
 import Chat from './components/chat/Chat'
-import { addMessage } from './redux/actions'
+import Auth from './components/authorization/authorization'
 import store from './redux/store'
-import socket from './socket'
+import {connect} from 'react-redux'
+import { logIn } from './redux/actions'
 
 import './style.sass'
 
-socket.onmessage = function(event) {
-    const message = JSON.parse(event.data);
-    store.dispatch(addMessage(message));
-    const chat = document.querySelector('.message-list');
-    chat.scrollTop = chat.scrollTopMax;
-}
+const name = localStorage.getItem('userName');
+if(name) store.dispatch(logIn(name)); 
 
-const App = () => (<Chat className="chat"/>)
+const App = ({ auth }) => auth ? (<Chat className="chat"/>) : (<Auth/>);
 
-export default App
-
+const mapStateToProps = state => {
+    const { authorization } = state;
+    return { auth: authorization.auth };
+  };
+    
+export default connect(mapStateToProps)(App);
