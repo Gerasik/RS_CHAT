@@ -7,7 +7,7 @@ const MessageList = ({mesList}) => (
     <>
         <ul className="message-list">
             {
-                mesList.map((item) => (
+                mesList.slice(mesList.length-50).map((item) => (
                     <li className='message' key={item.id}>
                         <span className='message__from'>{item.from}</span>
                         <span className='message__time'>{new Date(item.time).toDateString()}</span>
