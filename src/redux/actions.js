@@ -25,7 +25,7 @@ export const logOut = () => {
 }
 
 export const onConnect = () => {
-  const socket = new WebSocket("ws://st-chat.shas.tel");
+  const socket = new WebSocket("wss://wssproxy.herokuapp.com/");
   return {
     type: ON_CONNECT,
     payload: {

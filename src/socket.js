@@ -1,7 +1,7 @@
 let socket = null;
 
 function startSocket () {
-    socket = new WebSocket("ws://st-chat.shas.tel");
+    socket = new WebSocket("wss://wssproxy.herokuapp.com/");
 }
 
 startSocket();
